@@ -69,17 +69,47 @@
         <!-- Confirmation Modal -->
         <div id="confirm-modal" class="fixed inset-0 bg-brand-900/30 backdrop-blur-sm flex items-center justify-center hidden z-50">
             <div class="glass-card rounded-3xl p-6 max-w-sm mx-4 shadow-2xl shadow-brand-500/20">
-                <h3 class="text-lg font-bold text-gray-900 mb-2">Tinggalkan halaman ini?</h3>
-                <p class="text-gray-600 text-sm mb-1">
-                    Anda akan membuka: <span id="modal-link-title" class="font-semibold text-brand-600"></span>
-                </p>
-                <p class="text-gray-400 text-xs mb-5 break-all" id="modal-link-url"></p>
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center shadow-md shadow-amber-500/30">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 leading-tight">Tinggalkan halaman ini?</h3>
+                        <p class="text-gray-500 text-sm mt-0.5">Anda akan membuka: <span id="modal-link-title" class="font-semibold text-white"></span></p>
+                    </div>
+                </div>
+
+                <!-- URL — bold & clear -->
+                <div class="rounded-xl bg-gradient-to-r from-brand-500 to-brand-400 p-4 mb-4 shadow-lg shadow-brand-500/25">
+                    <p class="text-[10px] uppercase tracking-wider font-bold text-brand-100 mb-1">Alamat URL Tujuan</p>
+                    <p class="text-white font-bold text-sm break-all leading-snug" id="modal-link-url"></p>
+                </div>
+
+                <!-- User-generated content disclaimer -->
+                <div class="rounded-xl bg-amber-100/80 border border-amber-300/60 px-4 py-3 mb-4">
+                    <p class="text-xs text-amber-800 leading-relaxed">
+                        Link ini dibuat oleh <span class="font-bold">{{ $user->website_name }}</span>.
+                        Pastikan kamu <span class="font-bold">mengetahui dan memahami</span> URL yang akan kamu kunjungi sebelum melanjutkan.
+                    </p>
+                </div>
+
+                <!-- Mandatory acknowledgment -->
+                <label class="flex items-start gap-2.5 mb-5 cursor-pointer">
+                    <input type="checkbox" id="confirm-acknowledge" onchange="updateConfirmButton()"
+                        class="mt-0.5 w-4 h-4 rounded border-gray-300 text-brand-500 focus:ring-brand-400">
+                    <span class="text-sm text-gray-700">
+                        Saya mengerti dan memahami alamat URL di atas, dan saya bersedia membukanya atas tanggung jawab saya sendiri.
+                    </span>
+                </label>
+
                 <div class="flex gap-3 justify-end">
                     <button onclick="closeModal()" class="px-4 py-2.5 text-gray-700 glass-input rounded-xl hover:bg-white/70 text-sm font-medium transition">
                         Batal
                     </button>
                     <a id="confirm-link" href="#" target="_blank"
-                        class="px-4 py-2.5 bg-gradient-to-r from-brand-500 to-brand-400 text-white rounded-xl hover:from-brand-600 hover:to-brand-500 text-sm font-semibold shadow-lg shadow-brand-500/30 transition"
+                        class="px-5 py-2.5 bg-gradient-to-r from-brand-500 to-brand-400 text-white rounded-xl hover:from-brand-600 hover:to-brand-500 text-sm font-semibold shadow-lg shadow-brand-500/30 transition opacity-40 pointer-events-none"
                         onclick="closeModal()">
                         Buka Link
                     </a>
@@ -96,6 +126,8 @@
             document.getElementById('modal-link-title').textContent = title;
             document.getElementById('modal-link-url').textContent = url;
             document.getElementById('confirm-link').href = url;
+            document.getElementById('confirm-acknowledge').checked = false;
+            updateConfirmButton();
             document.getElementById('confirm-modal').classList.remove('hidden');
 
             // Record click via fetch
@@ -108,8 +140,20 @@
             });
         }
 
+        function updateConfirmButton() {
+            const acknowledged = document.getElementById('confirm-acknowledge').checked;
+            const btn = document.getElementById('confirm-link');
+            if (acknowledged) {
+                btn.classList.remove('opacity-40', 'pointer-events-none');
+            } else {
+                btn.classList.add('opacity-40', 'pointer-events-none');
+            }
+        }
+
         function closeModal() {
             document.getElementById('confirm-modal').classList.add('hidden');
+            document.getElementById('confirm-acknowledge').checked = false;
+            updateConfirmButton();
             pendingUrl = '';
         }
 

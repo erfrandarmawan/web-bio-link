@@ -26,8 +26,8 @@
         <div class="mb-6 space-y-3">
             <div class="flex gap-2">
                 <select id="sort-select" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="latest" selected>Terbaru</option>
                     <option value="alphabet">Abjad</option>
-                    <option value="latest">Terbaru</option>
                     <option value="oldest">Terlama</option>
                 </select>
                 <input type="text" id="search-input" placeholder="Cari Link..."

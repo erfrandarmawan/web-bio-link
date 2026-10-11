@@ -14,7 +14,9 @@ class UserLinkController extends Controller
         $user = User::where('username', strtolower($username))->firstOrFail();
 
         /** @var Collection<int, Link> $links */
-        $links = $user->links()->whereNull('deleted_at');
+        $links = $user->links()
+            ->whereNull('deleted_at')
+            ->orderBy('created_at', 'desc');
 
         return view('user-link', [
             'user' => $user,

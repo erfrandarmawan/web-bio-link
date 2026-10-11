@@ -49,7 +49,12 @@
             <div class="mb-6">
                 <label for="website_name" class="block text-sm font-medium text-gray-700 mb-1">Nama Website</label>
                 <input type="text" name="website_name" id="website_name" value="{{ old('website_name', $user->website_name) }}" required maxlength="50"
+                    oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, ''); document.getElementById('wname-count').textContent = this.value.length"
                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('website_name') border-red-500 @enderror">
+                <div class="flex justify-between mt-1">
+                    <span class="text-xs text-gray-500">Hanya huruf, angka, dan spasi.</span>
+                    <span class="text-xs text-gray-400"><span id="wname-count">{{ strlen(old('website_name', $user->website_name)) }}</span>/50</span>
+                </div>
                 @error('website_name')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

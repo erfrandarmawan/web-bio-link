@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard - ' . config('app.name'))
+@section('title', 'Dasbor - ' . config('app.name'))
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -28,6 +28,26 @@
             <p class="text-sm text-gray-500">Total Tautan</p>
             <p class="text-3xl font-bold text-gray-900">{{ $totalLinks }}</p>
         </div>
+    </div>
+
+    <!-- Clicks Per Day Chart -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">Klik Per Hari</h2>
+        @if ($clicksPerDay->isNotEmpty())
+            <div class="space-y-2">
+                @foreach ($clicksPerDay as $day)
+                    <div class="flex items-center gap-4">
+                        <span class="text-sm text-gray-600 w-32">{{ \Carbon\Carbon::parse($day->date)->format('d M, Y') }}</span>
+                        <div class="flex-1 bg-gray-100 rounded-full h-4">
+                            <div class="bg-blue-600 h-4 rounded-full" style="width: {{ ($day->total / $clicksPerDay->max('total')) * 100 }}%"></div>
+                        </div>
+                        <span class="text-sm font-semibold text-gray-900 w-12 text-right">{{ $day->total }}</span>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-500 text-sm">Belum ada klik di periode ini.</p>
+        @endif
     </div>
 
     <!-- Link Performance Table -->

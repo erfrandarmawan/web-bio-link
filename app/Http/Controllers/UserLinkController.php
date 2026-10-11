@@ -11,7 +11,7 @@ class UserLinkController extends Controller
 {
     public function show(string $username): View
     {
-        $user = User::where('username', $username)->firstOrFail();
+        $user = User::where('username', strtolower($username))->firstOrFail();
 
         /** @var Collection<int, Link> $links */
         $links = $user->links()->whereNull('deleted_at');

@@ -16,7 +16,11 @@
             <div class="mb-4">
                 <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Judul</label>
                 <input type="text" name="title" id="title" value="{{ old('title', $link->title ?? '') }}" required maxlength="100"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('title') border-red-500 @enderror">
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('title') border-red-500 @enderror"
+                    oninput="document.getElementById('title-count').textContent = this.value.length">
+                <div class="flex justify-end mt-1">
+                    <span class="text-xs text-gray-400"><span id="title-count">{{ strlen(old('title', $link->title ?? '')) }}</span>/100</span>
+                </div>
                 @error('title')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -26,7 +30,11 @@
                 <label for="url" class="block text-sm font-medium text-gray-700 mb-1">URL</label>
                 <input type="url" name="url" id="url" value="{{ old('url', $link->url ?? '') }}" required maxlength="500"
                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('url') border-red-500 @enderror"
-                    placeholder="https://example.com">
+                    placeholder="https://example.com"
+                    oninput="document.getElementById('url-count').textContent = this.value.length">
+                <div class="flex justify-end mt-1">
+                    <span class="text-xs text-gray-400"><span id="url-count">{{ strlen(old('url', $link->url ?? '')) }}</span>/500</span>
+                </div>
                 @error('url')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

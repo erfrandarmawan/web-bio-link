@@ -23,7 +23,7 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $validated = $request->validate([
-            'website_name' => ['required', 'string', 'max:50'],
+            'website_name' => ['required', 'string', 'max:50', 'regex:/^[a-zA-Z0-9\s]+$/'],
             'avatar_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 

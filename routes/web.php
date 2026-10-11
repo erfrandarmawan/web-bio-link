@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AnalyticController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -46,8 +45,8 @@ Route::middleware('auth')->group(function () {
     // Links CRUD
     Route::resource('/links', LinkController::class)->except(['show']);
 
-    // Analytics
-    Route::get('/analytics', [AnalyticController::class, 'index'])->name('analytics');
+    // Analytics (redirected to dashboard — merged feature)
+    Route::get('/analytics', fn () => redirect()->route('dashboard'))->name('analytics');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

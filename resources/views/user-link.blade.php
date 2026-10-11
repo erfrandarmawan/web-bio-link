@@ -26,7 +26,6 @@
         <div class="mb-6 space-y-3">
             <div class="flex gap-2">
                 <select id="sort-select" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="default">Default</option>
                     <option value="alphabet">Abjad</option>
                     <option value="latest">Terbaru</option>
                     <option value="oldest">Terlama</option>
@@ -60,9 +59,10 @@
         <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
             <div class="bg-white rounded-lg p-6 max-w-sm mx-4 shadow-xl">
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Tinggalkan halaman ini?</h3>
-                <p class="text-gray-600 text-sm mb-6">
+                <p class="text-gray-600 text-sm mb-1">
                     Anda akan membuka: <span id="modal-link-title" class="font-medium text-gray-900"></span>
                 </p>
+                <p class="text-gray-400 text-xs mb-4 break-all" id="modal-link-url"></p>
                 <div class="flex gap-3 justify-end">
                     <button onclick="closeModal()" class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 text-sm font-medium">
                         Batal
@@ -83,6 +83,7 @@
         function confirmLink(linkId, url, title) {
             pendingUrl = url;
             document.getElementById('modal-link-title').textContent = title;
+            document.getElementById('modal-link-url').textContent = url;
             document.getElementById('confirm-link').href = url;
             document.getElementById('confirm-modal').classList.remove('hidden');
 

@@ -23,8 +23,8 @@ class RegisterController extends Controller
         $validated = $request->validate([
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'website_name' => ['required', 'string', 'max:50'],
-            'username' => ['required', 'string', 'max:50', 'unique:users,username', 'alpha_dash'],
+            'website_name' => ['required', 'string', 'max:50', 'regex:/^[a-zA-Z0-9\s]+$/'],
+            'username' => ['required', 'string', 'max:50', 'unique:users,username', 'alpha_dash', 'lowercase'],
         ]);
 
         $user = User::create([

@@ -38,10 +38,18 @@ class DashboardController extends Controller
             }])
             ->get();
 
+        $clicksPerDay = Analytic::whereIn('link_id', $linkIds)
+            ->whereBetween('created_at', $dateRange)
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as total')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
         return view('dashboard.index', [
             'totalClicks' => $totalClicks,
             'totalLinks' => $totalLinks,
             'linksWithClicks' => $linksWithClicks,
+            'clicksPerDay' => $clicksPerDay,
             'period' => $period,
         ]);
     }

@@ -21,7 +21,6 @@
                         @auth
                             <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Dasbor</a>
                             <a href="{{ route('links.index') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Tautan</a>
-                            <a href="{{ route('analytics') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Analitik</a>
                             <a href="{{ route('profile.edit') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Profil</a>
                             <form method="POST" action="{{ route('logout') }}" class="inline">
                                 @csrf

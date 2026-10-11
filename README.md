@@ -1,58 +1,277 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Web Bio Link
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Product Requirements Document : https://docs.google.com/document/d/1mp4S8aExsG5AID9NOd6aBIHBu1RXWITSCcdNxigQU7E/edit?usp=sharing
 
-## About Laravel
+Aplikasi web untuk **membuat halaman bio link** (seperti Linktree/Bio.link) yang dapat dikelola sendiri. Setiap pengguna mendapatkan halaman publik dengan tautan personal (link.develobe.id/{username}) untuk membagikan semua tautan penting dalam satu tempat, lengkap dengan dashboard analitik dan manajemen profil.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Dibangun dengan **Laravel 13**, **PHP 8.5**, **MySQL**, **Tailwind CSS 4**, **Liquid Glass UI**, dan **Vite**.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Fitur Utama
 
-## Learning Laravel
+- **Autentikasi lengkap** — register, login, logout, lupa password, dan reset password.
+- **Username unik & permanen** — username dipilih saat pendaftaran dan tidak bisa diubah (digunakan untuk `link.develobe.id/{username}`).
+- **Halaman link publik** — setiap user memiliki halaman publik yang menampilkan foto profil, nama website, dan daftar tautan dengan fitur pencarian serta pengurutan (Abjad, Terbaru, Terlama).
+- **Konfirmasi link** — sebelum membuka tautan, pengunjung wajib melihat URL tujuan dan memberikan persetujuan eksplisit (melindungi platform dari konten buatan pengguna).
+- **Pelacakan klik** — setiap klik pada tautan dicatat (user agent + timestamp) untuk kebutuhan analitik.
+- **Dashboard analitik** — total klik, total tautan, dan grafik klik per hari dengan filter periode: Hari Ini, 7 Hari Terakhir, 30 Hari Terakhir, dan Bulan Ini (gabungan menu Dasbor & Analitik).
+- **CRUD tautan** — tambah, ubah, dan hapus tautan (soft delete).
+- **Manajemen profil** — ubah foto profil (dengan preview), nama website, dan ganti password.
+- **Liquid Glass UI** — antarmuka modern dengan efek glassmorphism bertema `#38b6ff`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🧱 Teknologi
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+| Kategori | Teknologi |
+| --- | --- |
+| Backend | Laravel 13, PHP 8.5 |
+| Database | MySQL |
+| Frontend | Blade, Tailwind CSS 4, Liquid Glass UI, Vite 8 |
+| Testing | Pest 5, PHPUnit |
+| Tooling | Laravel Pint, Laravel Boost, Laravel Pail |
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## ✅ Persyaratan
+
+Pastikan sudah terpasang:
+
+- PHP **8.3+** (disarankan 8.5) dengan ekstensi standar Laravel (`pdo_mysql`, `mysqli`)
+- Composer
+- Node.js **18+** dan npm
+- MySQL (server berjalan)
+
+---
+
+## 🚀 Langkah Menjalankan Proyek
+
+### 1. Clone repositori
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/erfrandarmawan/web-bio-link.git web-bio-link
+cd web-bio-link
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Install dependensi PHP & JavaScript
 
-## Contributing
+```bash
+composer install
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Siapkan environment
 
-## Code of Conduct
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4. Buat database MySQL
 
-## Security Vulnerabilities
+Buat database bernama `web_link_in_bio` (atau sesuaikan dengan `DB_DATABASE` di `.env`).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```sql
+CREATE DATABASE web_link_in_bio CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
-## License
+Sesuaikan kredensial database pada `.env` bila perlu:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=web_link_in_bio
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Jalankan pula session driver dan lainnya:
+
+```env
+SESSION_DRIVER=database
+```
+
+### 5. Buat symbolic link storage
+
+```bash
+php artisan storage:link
+```
+
+### 6. Jalankan migrasi
+
+```bash
+php artisan migrate
+```
+
+### 7. Jalankan aplikasi
+
+Cara cepat (menjalankan server dan Vite sekaligus):
+
+```bash
+composer run dev
+```
+
+Atau jalankan secara terpisah:
+
+```bash
+php artisan serve
+npm run dev
+```
+
+Buka **http://localhost:8000** di browser.
+
+> Untuk mode produksi, jalankan `npm run build` agar aset frontend dikompilasi.
+
+---
+
+## 🧪 Menjalankan Test
+
+```bash
+php artisan test --compact
+```
+
+Test menggunakan database SQLite in-memory (lihat `phpunit.xml`), jadi tidak mengganggu data MySQL.
+
+---
+
+## 🗂️ Struktur Proyek
+
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── Auth/                      # Login, Register, Forgot/Reset Password, Logout
+│   │   ├── DashboardController.php    # Ringkasan & grafik analitik
+│   │   ├── HomeController.php         # Halaman landing
+│   │   ├── LinkController.php         # CRUD tautan + pelacakan klik
+│   │   ├── ProfileController.php      # Manajemen profil & ganti password
+│   │   └── UserLinkController.php     # Halaman link publik per username
+│   └── (Controllers lainnya)
+├── Models/
+│   ├── Analytic.php                   # Catatan klik per tautan
+│   ├── Link.php                       # Tautan dengan soft delete
+│   └── User.php                       # UUID + relasi ke tautan
+└── (Providers, dll)
+
+database/
+├── migrations/                        # Skema: users (UUID), links, analytics, cache, jobs, sessions
+├── factories/                         # UserFactory
+└── seeders/                           # DatabaseSeeder
+
+resources/views/
+├── layouts/
+│   ├── app.blade.php                  # Layout utama (navbar glass, liquid background)
+│   └── guest.blade.php                # Layout halaman publik/auth (liquid background)
+├── auth/                              # Halaman autentikasi (login, register, forgot, reset)
+├── dashboard/index.blade.php          # Dashboard + grafik analitik
+├── landing.blade.php                  # Halaman depan
+├── links/                             # Daftar & form tautan
+├── profile/
+│   ├── edit.blade.php                 # Edit profil + preview avatar
+│   └── change-password.blade.php      # Ganti password
+└── user-link.blade.php                # Halaman link publik (setiap user)
+```
+
+---
+
+## 🧭 Routing
+
+| Method | URI | Keterangan |
+| --- | --- | --- |
+| `GET` | `/` | Halaman landing |
+| `GET` | `/{username}` | Halaman link publik user |
+| `POST` | `/links/{link}/click` | Catat klik tautan (publik) |
+| `GET` | `/login` | Form login |
+| `POST` | `/login` | Proses login |
+| `GET` | `/register` | Form register |
+| `POST` | `/register` | Proses register |
+| `GET` | `/forgot-password` | Form lupa password |
+| `POST` | `/forgot-password` | Kirim link reset |
+| `GET` | `/reset-password/{token}` | Form reset password |
+| `POST` | `/reset-password` | Proses reset password |
+| `GET` | `/dashboard` | Dashboard analitik (dengan filter periode) |
+| `GET` | `/analytics` | Redirect ke dashboard (digabung) |
+| `GET` | `/links` | Daftar tautan saya |
+| `GET` | `/links/create` | Form tambah tautan |
+| `POST` | `/links` | Simpan tautan baru |
+| `GET` | `/links/{link}/edit` | Form ubah tautan |
+| `PUT` | `/links/{link}` | Perbarui tautan |
+| `DELETE` | `/links/{link}` | Hapus tautan (soft delete) |
+| `GET` | `/profile` | Edit profil |
+| `PUT` | `/profile` | Perbarui profil |
+| `GET` | `/profile/password` | Form ganti password |
+| `PUT` | `/profile/password` | Proses ganti password |
+| `POST` | `/logout` | Logout |
+
+Lihat semua rute dengan:
+
+```bash
+php artisan route:list --except-vendor
+```
+
+---
+
+## 🖌️ Tema & Desain
+
+Aplikasi menggunakan tema **Liquid Glass (Glassmorphism)** dengan palet warna utama `#38b6ff`.
+
+### Komponen desain
+
+- **Background**: gradien cair dengan gumpalan warna biru/cyan/purple yang bergerak secara animasi
+- **Kartu**: efek kaca patri dengan `backdrop-filter: blur(20px)` dan batas semi-transparan
+- **Navigasi**: navbar lengket dengan efek buram di bagian bawah
+- **Tombol aksi**: gradien dari `#38b6ff` ke biru muda dengan bayangan
+- **Input**: bidang transparan dengan efek kaca
+
+Lihat `resources/css/app.css` untuk detail kelas utilitas kustom (`glass-card`, `glass-input`, `glass-nav`, `bg-liquid`, `blob`).
+
+---
+
+## 🔒 Keamanan & Perlindungan Platform
+
+Karena tautan yang dibagikan adalah **konten buatan pengguna (user-generated content)**, platform menerapkan langkah-langkah berikut:
+
+1. **Konfirmasi eksplisit** — setiap pengunjung yang akan membuka tautan diwajibkan:
+   - Melihat URL tujuan yang ditampilkan dengan jelas
+   - Membaca pernyataan bahwa link dibuat oleh pemilik halaman, bukan oleh platform
+   - Mencentang persetujuan bahwa mereka memahami dan bertanggung jawab atas tautan yang dibuka
+
+2. **Soft delete** — tautan yang dihapus tidak langsung hilang, memungkinkan pemulihan data jika diperlukan.
+
+3. **Validasi input** — URL divalidasi sebagai format URL yang benar, username dibatasi karakter tertentu, nama website hanya huruf/angka/spasi.
+
+---
+
+## 🛠️ Command List
+
+```bash
+php artisan migrate:fresh            # Reset database
+php artisan route:list               # Lihat daftar rute
+vendor/bin/pint                      # Rapikan format kode PHP
+php artisan pail                     # Lihat log aplikasi secara real-time
+npm run build                        # Build aset untuk produksi
+php artisan storage:link             # Tautkan storage untuk akses publik
+php artisan view:cache               # Cache template Blade
+php artisan view:clear               # Hapus cache template Blade
+```
+
+---
+
+## 💖 Dukungan & Kontak
+
+Kamu dapat mendukung saya di https://saweria.co/erfrandarmawan
+
+Collab via erfrandarmawan@develobe.id
+
+Social Media Channel :
+- https://www.youtube.com/@develobe_id
+- https://tiktok.com/@erfrandarmawan
+- https://instagram.com/erfrandarmawan
+
+---
+
+## 📄 Lisensi
+
+Proyek ini menggunakan lisensi [MIT](https://opensource.org/licenses/MIT).

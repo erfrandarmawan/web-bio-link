@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Edit Profil - ' . config('app.name'))
 
@@ -69,7 +69,7 @@
     <!-- Preview Link -->
     <div class="bg-white rounded-lg shadow-md p-6">
         <h2 class="text-lg font-semibold text-gray-900 mb-2">Halaman Publik Anda</h2>
-        <p class="text-sm text-gray-600 mb-4">Bagikan tautan ini di profil media sosial Anda.</p>
+        <p class="text-sm text-gray-600 mb-4">Bagikan Link ini di profil media sosial Anda.</p>
         <a href="{{ route('user.link', $user->username) }}" target="_blank"
             class="text-blue-600 hover:text-blue-800 text-sm font-medium break-all">
             {{ route('user.link', $user->username) }}

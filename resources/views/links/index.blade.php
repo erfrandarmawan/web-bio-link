@@ -1,14 +1,14 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
-@section('title', 'Tautan - ' . config('app.name'))
+@section('title', 'Link - ' . config('app.name'))
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-gray-900">Tautan Saya</h1>
+        <h1 class="text-2xl font-bold text-gray-900">Link Saya</h1>
         <a href="{{ route('links.create') }}"
             class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">
-            + Tambah Tautan
+            + Tambah Link
         </a>
     </div>
 
@@ -30,7 +30,7 @@
                             <a href="{{ route('links.edit', $link) }}"
                                 class="text-blue-600 hover:text-blue-800 font-medium">Ubah</a>
                             <form method="POST" action="{{ route('links.destroy', $link) }}" class="inline"
-                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus tautan ini?')">
+                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus Link ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-600 hover:text-red-800 font-medium">Hapus</button>
@@ -40,8 +40,8 @@
                 @empty
                     <tr>
                         <td colspan="3" class="px-6 py-8 text-center text-gray-500">
-                            Belum ada tautan.
-                            <a href="{{ route('links.create') }}" class="text-blue-600 hover:text-blue-800">Buat tautan pertama Anda</a>
+                            Belum ada Link.
+                            <a href="{{ route('links.create') }}" class="text-blue-600 hover:text-blue-800">Buat Link pertama Anda</a>
                         </td>
                     </tr>
                 @endforelse

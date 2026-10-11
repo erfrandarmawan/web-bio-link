@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Dasbor - ' . config('app.name'))
 
@@ -25,7 +25,7 @@
             <p class="text-3xl font-bold text-gray-900">{{ $totalClicks }}</p>
         </div>
         <div class="bg-white rounded-lg shadow-md p-6">
-            <p class="text-sm text-gray-500">Total Tautan</p>
+            <p class="text-sm text-gray-500">Total Link</p>
             <p class="text-3xl font-bold text-gray-900">{{ $totalLinks }}</p>
         </div>
     </div>
@@ -53,7 +53,7 @@
     <!-- Link Performance Table -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200">
-            <h2 class="text-lg font-semibold text-gray-900">Kinerja Tautan</h2>
+            <h2 class="text-lg font-semibold text-gray-900">Kinerja Link</h2>
         </div>
         <table class="w-full">
             <thead class="bg-gray-50">
@@ -72,7 +72,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3" class="px-6 py-8 text-center text-gray-500">Belum ada tautan. <a href="{{ route('links.create') }}" class="text-blue-600 hover:text-blue-800">Buat tautan</a></td>
+                        <td colspan="3" class="px-6 py-8 text-center text-gray-500">Belum ada Link. <a href="{{ route('links.create') }}" class="text-blue-600 hover:text-blue-800">Buat Link</a></td>
                     </tr>
                 @endforelse
             </tbody>

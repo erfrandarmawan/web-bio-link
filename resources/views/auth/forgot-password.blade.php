@@ -1,11 +1,11 @@
-@extends('layouts.guest')
+﻿@extends('layouts.guest')
 
 @section('title', 'Lupa Password - ' . config('app.name'))
 
 @section('content')
 <div class="bg-white rounded-lg shadow-md p-8">
     <h1 class="text-2xl font-bold text-center mb-2">Lupa Password</h1>
-    <p class="text-center text-gray-600 text-sm mb-6">Masukkan email Anda dan kami akan mengirimkan tautan reset.</p>
+    <p class="text-center text-gray-600 text-sm mb-6">Masukkan email Anda dan kami akan mengirimkan Link reset.</p>
 
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
@@ -20,7 +20,7 @@
         </div>
 
         <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 font-medium">
-            Kirim Tautan Reset
+            Kirim Link Reset
         </button>
     </form>
 

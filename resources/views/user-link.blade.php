@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -30,7 +30,7 @@
                     <option value="latest">Terbaru</option>
                     <option value="oldest">Terlama</option>
                 </select>
-                <input type="text" id="search-input" placeholder="Cari tautan..."
+                <input type="text" id="search-input" placeholder="Cari Link..."
                     class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
         </div>
@@ -51,7 +51,7 @@
                     </button>
                 </div>
             @empty
-                <p class="text-center text-gray-500 py-8">Belum ada tautan.</p>
+                <p class="text-center text-gray-500 py-8">Belum ada Link.</p>
             @endforelse
         </div>
 
@@ -70,7 +70,7 @@
                     <a id="confirm-link" href="#" target="_blank"
                         class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"
                         onclick="closeModal()">
-                        Buka Tautan
+                        Buka Link
                     </a>
                 </div>
             </div>

@@ -1,10 +1,10 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
-@section('title', (isset($link) ? 'Ubah' : 'Buat') . ' Tautan - ' . config('app.name'))
+@section('title', (isset($link) ? 'Ubah' : 'Buat') . ' Link - ' . config('app.name'))
 
 @section('content')
 <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ isset($link) ? 'Ubah Tautan' : 'Buat Tautan' }}</h1>
+    <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ isset($link) ? 'Ubah Link' : 'Buat Link' }}</h1>
 
     <div class="bg-white rounded-lg shadow-md p-6">
         <form method="POST" action="{{ isset($link) ? route('links.update', $link) : route('links.store') }}">

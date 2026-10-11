@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -20,7 +20,7 @@
                     <div class="flex items-center gap-2">
                         @auth
                             <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Dasbor</a>
-                            <a href="{{ route('links.index') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Tautan</a>
+                            <a href="{{ route('links.index') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Link</a>
                             <a href="{{ route('profile.edit') }}" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Profil</a>
                             <form method="POST" action="{{ route('logout') }}" class="inline">
                                 @csrf

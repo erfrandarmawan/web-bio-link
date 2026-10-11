@@ -13,18 +13,19 @@
 
             <!-- Avatar -->
             <div class="mb-6 text-center">
-                @if ($user->avatar_image)
-                    <img src="{{ Storage::url($user->avatar_image) }}" alt="Avatar"
-                        class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-gray-200">
-                @else
-                    <div class="w-24 h-24 rounded-full mx-auto bg-blue-600 flex items-center justify-center border-4 border-gray-200">
-                        <span class="text-3xl text-white font-bold">{{ substr($user->website_name, 0, 2) }}</span>
-                    </div>
-                @endif
+                <img id="avatar-preview"
+                    src="{{ $user->avatar_image ? Storage::url($user->avatar_image) : '' }}"
+                    alt="Preview Avatar"
+                    class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-gray-200 {{ $user->avatar_image ? '' : 'hidden' }}">
+                <div id="avatar-placeholder" class="w-24 h-24 rounded-full mx-auto bg-blue-600 flex items-center justify-center border-4 border-gray-200 {{ $user->avatar_image ? 'hidden' : '' }}">
+                    <span class="text-3xl text-white font-bold">{{ substr($user->website_name, 0, 2) }}</span>
+                </div>
                 <label for="avatar_image" class="mt-3 inline-block text-sm text-blue-600 hover:text-blue-800 cursor-pointer">
                     Ganti Foto
                 </label>
-                <input type="file" name="avatar_image" id="avatar_image" accept="image/jpeg,image/png,image/webp" class="hidden">
+                <input type="file" name="avatar_image" id="avatar_image" accept="image/jpeg,image/png,image/webp" class="hidden"
+                    onchange="previewAvatar(this)">
+                <p id="avatar-file-name" class="text-xs text-gray-500 mt-1"></p>
                 @error('avatar_image')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -76,4 +77,23 @@
         </a>
     </div>
 </div>
+
+<script>
+function previewAvatar(input) {
+    const preview = document.getElementById('avatar-preview');
+    const placeholder = document.getElementById('avatar-placeholder');
+    const fileName = document.getElementById('avatar-file-name');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
+            placeholder.classList.add('hidden');
+            fileName.textContent = input.files[0].name;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 @endsection

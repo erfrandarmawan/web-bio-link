@@ -4,9 +4,9 @@
 
 @section('content')
 <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">Ganti Password</h1>
+    <h1 class="text-3xl font-bold text-gray-900 mb-6">Ganti Password</h1>
 
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div class="glass-card rounded-3xl p-8">
         <form method="POST" action="{{ route('profile.password.update') }}">
             @csrf
             @method('PUT')
@@ -15,9 +15,9 @@
                 <label for="current_password" class="block text-sm font-medium text-gray-700 mb-1">Password Saat Ini</label>
                 <div class="relative">
                     <input type="password" name="current_password" id="current_password" required
-                        class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('current_password') border-red-500 @enderror">
+                        class="w-full px-4 py-2.5 pr-11 glass-input rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent placeholder-gray-400 @error('current_password') !border-red-400 @enderror">
                     <button type="button" onclick="togglePassword('current_password', this)"
-                        class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
+                        class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-brand-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -33,9 +33,9 @@
                 <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password Baru</label>
                 <div class="relative">
                     <input type="password" name="password" id="password" required minlength="8"
-                        class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror">
+                        class="w-full px-4 py-2.5 pr-11 glass-input rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent placeholder-gray-400 @error('password') !border-red-400 @enderror">
                     <button type="button" onclick="togglePassword('password', this)"
-                        class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
+                        class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-brand-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -51,9 +51,9 @@
                 <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Password Baru</label>
                 <div class="relative">
                     <input type="password" name="password_confirmation" id="password_confirmation" required
-                        class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        class="w-full px-4 py-2.5 pr-11 glass-input rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent placeholder-gray-400">
                     <button type="button" onclick="togglePassword('password_confirmation', this)"
-                        class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
+                        class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-brand-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 font-medium">
+            <button type="submit" class="w-full bg-gradient-to-r from-brand-500 to-brand-400 text-white py-2.5 px-4 rounded-xl hover:from-brand-600 hover:to-brand-500 font-semibold shadow-lg shadow-brand-500/30 transition">
                 Ganti Password
             </button>
         </form>
